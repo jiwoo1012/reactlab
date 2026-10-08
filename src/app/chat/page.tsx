@@ -55,7 +55,11 @@ const ChatContent = () => {
   // 웹 소켓 서버 연결
   useEffect(()=>{
     // 이미 존재하는 (express에서 만들어진) WebSocket 서버에 접속
-    const socket = new WebSocket('ws://localhost:4000')
+    const WS_URL =
+  process.env.NEXT_PUBLIC_WS_URL ||
+  'ws://localhost:4000'
+
+const socket = new WebSocket(WS_URL)
     socketRef.current=socket
 
     socket.onopen=()=>{
