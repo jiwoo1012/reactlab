@@ -273,9 +273,11 @@ app.get( "/auth/kakao/callback",  async (req, res) => {
 );
 
 
-const server = app.listen(process.env.PORT || 4000, ()=>{
+const PORT = Number(process.env.PORT) || 4000;
+
+const server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`서버 실행: ${PORT}`);
-})
+});
 
 //
 
