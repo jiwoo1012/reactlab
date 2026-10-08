@@ -1,0 +1,638 @@
+.page {
+  min-height: 100vh;
+
+  padding:
+    125px
+    6vw
+    90px;
+
+  background: #f3f0e8;
+  color: #111111;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.title {
+  width: min(1120px, 100%);
+
+  margin:
+    0
+    auto
+    44px;
+
+  /*
+    TSX는 그대로 두고
+    "OpenAI API 활용" 문구만 숨김
+  */
+  > p {
+    display: none;
+  }
+
+  h1 {
+    margin: 0;
+    
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: clamp(
+      58px,
+      6.3vw,
+      60px
+    );
+
+    font-weight: 900;
+
+    line-height: 0.9;
+    letter-spacing: -0.07em;
+  }
+
+  span {
+    display: block;
+
+    margin-top: 30px;
+
+    color: #696761;
+
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
+
+
+/* =========================================
+   MAIN PANEL
+========================================= */
+
+.panel {
+  width: min(1120px, 100%);
+
+  margin: 0 auto;
+
+  padding:
+    25px
+    0
+    42px;
+
+  border-top:
+    2px
+    solid
+    #111111;
+
+  background: transparent;
+
+  > h2 {
+    margin:
+      0
+      0
+      18px;
+
+    font-size: 17px;
+    font-weight: 900;
+
+    letter-spacing: -0.025em;
+  }
+}
+
+
+/* =========================================
+   STUDY MODES
+========================================= */
+
+.modes {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap: 8px;
+
+  margin-bottom: 38px;
+}
+
+
+/* =========================================
+   MODE CARD
+========================================= */
+
+.mode {
+  position: relative;
+
+  min-height: 138px;
+
+  padding:
+    22px
+    22px
+    20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+
+  border:
+    1px
+    solid
+    #c8c4b9;
+
+  border-radius: 0;
+
+  background: #f9f7f0;
+  color: #111111;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    transform 0.18s ease;
+
+  /*
+    우측 상단 선택 표시
+  */
+  &::before {
+    content: "";
+
+    position: absolute;
+
+    top: 16px;
+    right: 16px;
+
+    width: 9px;
+    height: 9px;
+
+    border:
+      1.5px
+      solid
+      #8c8981;
+
+    border-radius: 50%;
+
+    background: transparent;
+  }
+
+  strong {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #111111;
+
+    font-size: 21px;
+    font-weight: 900;
+
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+  }
+
+  p {
+    max-width: 270px;
+
+    margin: 0;
+
+    color: #6d6a63;
+
+    font-size: 12.5px;
+    line-height: 1.55;
+
+    word-break: keep-all;
+  }
+
+  &:hover {
+    border-color: #8f8b82;
+
+    background: #f4f1e8;
+  }
+
+
+  /* =====================================
+     SELECTED
+  ===================================== */
+
+  &[aria-pressed='true'] {
+    border:
+      2px
+      solid
+      #7165ff;
+
+    background: #eeebff;
+
+    /*
+      1px → 2px 변경으로 카드 크기가
+      흔들리지 않게 내부 보정
+    */
+    padding:
+      21px
+      21px
+      19px;
+
+    &::before {
+      border-color: #7165ff;
+
+      background: #7165ff;
+    }
+
+    strong {
+      color: #111111;
+    }
+
+    p {
+      color: #5f5a75;
+    }
+  }
+}
+
+
+/* =========================================
+   QUESTION AREA
+========================================= */
+
+.question {
+  padding-top: 25px;
+
+  border-top:
+    1px
+    solid
+    #cbc7bd;
+
+  label {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: #111111;
+
+    font-size: 15px;
+    font-weight: 900;
+
+    letter-spacing: -0.025em;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 180px;
+
+    padding:
+      21px
+      22px;
+
+    resize: vertical;
+
+    border:
+      1.5px
+      solid
+      #5d5a54;
+
+    border-radius: 0;
+
+    outline: none;
+
+    background: #faf8f2;
+    color: #111111;
+
+    font-family: inherit;
+
+    font-size: 15px;
+    line-height: 1.7;
+
+    transition:
+      border-color 0.18s ease,
+      background 0.18s ease,
+      box-shadow 0.18s ease;
+
+    &::placeholder {
+      color: #aaa69b;
+    }
+
+    &:hover {
+      border-color: #111111;
+    }
+
+    &:focus {
+      border-color: #111111;
+
+      background: #fffefa;
+
+      /*
+        SaaS스럽게 사방으로 번지는 그림자 대신
+        홈에서 쓰는 보라색을 얇게 연결
+      */
+      box-shadow:
+        5px
+        5px
+        0
+        #7165ff;
+    }
+  }
+}
+
+
+/* =========================================
+   SUBMIT
+========================================= */
+
+.submit {
+  min-width: 140px;
+  min-height: 46px;
+
+  margin:
+    17px
+    0
+    0
+    auto;
+
+  padding:
+    0
+    22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+
+  border-radius: 999px;
+
+  background: #caff36;
+  color: #111111;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    opacity 0.18s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+
+    background: #d7ff67;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+
+    cursor: wait;
+  }
+}
+
+
+/* =========================================
+   ANSWER
+========================================= */
+
+.answer {
+  width: min(1120px, 100%);
+
+  margin:
+    12px
+    auto
+    0;
+
+  padding:
+    28px
+    30px
+    32px;
+
+  border-top:
+    2px
+    solid
+    #111111;
+
+  border-bottom:
+    1px
+    solid
+    #cbc7bd;
+
+  background: #f9f7f0;
+
+  /*
+    홈 포인트 컬러 연결
+    과하지 않게 왼쪽 한 줄만 사용
+  */
+  box-shadow:
+    inset
+    5px
+    0
+    0
+    #7165ff;
+
+  h2 {
+    margin:
+      0
+      0
+      18px;
+
+    color: #111111;
+
+    font-size: 17px;
+    font-weight: 900;
+
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    margin: 0;
+
+    color: #302f2b;
+
+    font-size: 14px;
+    line-height: 1.85;
+
+    white-space: pre-wrap;
+
+    word-break: keep-all;
+  }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .page {
+    padding:
+      115px
+      24px
+      75px;
+  }
+
+  .title {
+    margin-bottom: 38px;
+
+    h1 {
+      font-size: clamp(
+        55px,
+        10vw,
+        80px
+      );
+    }
+  }
+
+  .modes {
+    grid-template-columns: 1fr;
+
+    gap: 7px;
+
+    margin-bottom: 32px;
+  }
+
+  .mode {
+    min-height: 115px;
+
+    padding:
+      20px
+      20px
+      18px;
+
+    &[aria-pressed='true'] {
+      padding:
+        19px
+        19px
+        17px;
+    }
+  }
+
+  .question {
+    textarea {
+      min-height: 170px;
+    }
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .page {
+    padding:
+      105px
+      16px
+      55px;
+  }
+
+  .title {
+    margin-bottom: 32px;
+
+    h1 {
+      font-size: 52px;
+
+      line-height: 0.92;
+    }
+
+    span {
+      margin-top: 11px;
+
+      font-size: 13px;
+    }
+  }
+
+  .panel {
+    padding-top: 20px;
+
+    > h2 {
+      margin-bottom: 14px;
+
+      font-size: 16px;
+    }
+  }
+
+  .modes {
+    margin-bottom: 28px;
+  }
+
+  .mode {
+    min-height: 105px;
+
+    padding:
+      18px
+      18px
+      16px;
+
+    strong {
+      margin-bottom: 6px;
+
+      font-size: 19px;
+    }
+
+    p {
+      font-size: 12px;
+    }
+
+    &[aria-pressed='true'] {
+      padding:
+        17px
+        17px
+        15px;
+    }
+  }
+
+  .question {
+    padding-top: 20px;
+
+    label {
+      font-size: 14px;
+    }
+
+    textarea {
+      min-height: 155px;
+
+      padding: 17px;
+
+      font-size: 14px;
+
+      &:focus {
+        box-shadow:
+          4px
+          4px
+          0
+          #7165ff;
+      }
+    }
+  }
+
+  .submit {
+    width: 100%;
+
+    min-height: 45px;
+
+    margin-top: 14px;
+  }
+
+  .answer {
+    margin-top: 8px;
+
+    padding:
+      24px
+      20px
+      27px;
+
+    h2 {
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 13.5px;
+    }
+  }
+}

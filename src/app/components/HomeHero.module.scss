@@ -1,0 +1,520 @@
+/* =========================================
+   HERO SCROLL SPACE
+========================================= */
+
+.heroScroll {
+  position: relative;
+
+  width: 100%;
+
+  /*
+    이 430vh를 스크롤하는 동안
+    실제 보이는 화면은 sticky로 고정된다.
+  */
+  height: 430vh;
+
+  background: #111111;
+}
+
+
+/* =========================================
+   STICKY VIEWPORT
+========================================= */
+
+.sticky {
+  position: sticky;
+  top: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  overflow: hidden;
+
+  background: #111111;
+  color: #f7f6f0;
+
+  isolation: isolate;
+}
+
+
+/* =========================================
+   HERO TEXT
+========================================= */
+
+.heroText {
+  position: absolute;
+
+  top: 19%;
+  left: 50%;
+
+  z-index: 20;
+
+  width: min(1050px, 90%);
+
+  text-align: center;
+
+  will-change:
+    transform,
+    opacity;
+}
+
+.badge {
+  margin: 0 0 17px;
+
+  color: #696969;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.18em;
+}
+
+.heroText h1 {
+  margin: 0;
+
+  color: #f7f6f0;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: clamp(
+    90px,
+    10vw,
+    175px
+  );
+
+  font-weight: 900;
+
+  line-height: 0.82;
+  letter-spacing: -0.085em;
+}
+
+.description {
+  max-width: 520px;
+
+  margin: 22px auto 0;
+
+  color: #777777;
+
+  font-size: 11px;
+  line-height: 1.7;
+
+  word-break: keep-all;
+}
+
+
+/* =========================================
+   HERO BUTTON
+========================================= */
+
+.startButton {
+  min-height: 43px;
+
+  margin-top: 25px;
+
+  padding:
+    0
+    20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 26px;
+
+  border-radius: 999px;
+
+  background: #caff36;
+  color: #111111;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
+
+
+/* =========================================
+   ICON ROW
+
+   처음에는 화면 전체 폭을
+   다섯 칸으로 꽉 채운다.
+========================================= */
+
+.iconRow {
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 5px;
+
+  align-items: end;
+
+  z-index: 10;
+
+  pointer-events: none;
+}
+
+
+/* =========================================
+   COMMON ICON
+========================================= */
+
+.icon {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform-origin: center center;
+
+  will-change: transform;
+
+  backface-visibility: hidden;
+}
+
+
+/* =========================================
+   01 QUESTION
+========================================= */
+
+.question {
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background: #7165ff;
+
+  span {
+    color: #111111;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: clamp(
+      95px,
+      9vw,
+      170px
+    );
+
+    font-weight: 900;
+
+    line-height: 1;
+  }
+}
+
+
+/* =========================================
+   02 CODE
+========================================= */
+
+.code {
+  overflow: hidden;
+
+  border-radius: 13px;
+
+  background: #00b75a;
+
+  span {
+    color: #111111;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: clamp(
+      60px,
+      5vw,
+      100px
+    );
+
+    font-weight: 900;
+
+    letter-spacing: -0.09em;
+  }
+}
+
+
+/* =========================================
+   03 AI
+========================================= */
+
+.ai {
+  overflow: hidden;
+
+  background: #ff583e;
+
+  clip-path: polygon(
+    0 0,
+    81% 0,
+    100% 50%,
+    81% 100%,
+    0 100%
+  );
+}
+
+.aiFace {
+  position: relative;
+
+  width: 34%;
+  height: 44%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 16%;
+
+  border-radius:
+    50%
+    50%
+    15%
+    15%;
+
+  background: #111111;
+
+  &::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    bottom: -14%;
+
+    height: 29%;
+
+    background: #111111;
+
+    clip-path: polygon(
+      0 0,
+      25% 100%,
+      50% 0,
+      75% 100%,
+      100% 0
+    );
+  }
+
+  i {
+    width: 13%;
+
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+
+    background: #ff583e;
+  }
+}
+
+
+/* =========================================
+   04 WEATHER
+========================================= */
+
+.weather {
+  overflow: hidden;
+
+  border-radius: 13px;
+
+  background: #ffc437;
+}
+
+.sun {
+  position: relative;
+
+  width: 31%;
+
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  background: #111111;
+
+  &::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -48%;
+
+    background:
+      conic-gradient(
+        #111 0deg 12deg,
+        transparent 12deg 45deg,
+
+        #111 45deg 57deg,
+        transparent 57deg 90deg,
+
+        #111 90deg 102deg,
+        transparent 102deg 135deg,
+
+        #111 135deg 147deg,
+        transparent 147deg 180deg,
+
+        #111 180deg 192deg,
+        transparent 192deg 225deg,
+
+        #111 225deg 237deg,
+        transparent 237deg 270deg,
+
+        #111 270deg 282deg,
+        transparent 282deg 315deg,
+
+        #111 315deg 327deg,
+        transparent 327deg 360deg
+      );
+
+    mask:
+      radial-gradient(
+        circle,
+        transparent 0 54%,
+        #000 55%
+      );
+  }
+}
+
+
+/* =========================================
+   05 CHAT
+========================================= */
+
+.chat {
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background: #458bff;
+}
+
+.chatBubble {
+  position: relative;
+
+  width: 44%;
+  height: 27%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9%;
+
+  border-radius: 999px;
+
+  background: #111111;
+
+  &::after {
+    content: "";
+
+    position: absolute;
+
+    right: 5%;
+    bottom: -27%;
+
+    width: 25%;
+    height: 40%;
+
+    background: #111111;
+
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 100%
+    );
+  }
+
+  i {
+    position: relative;
+
+    z-index: 2;
+
+    width: 9%;
+
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+
+    background: #458bff;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+  .heroScroll {
+    height: 380vh;
+  }
+
+  .heroText {
+    top: 17%;
+
+    width: 92%;
+  }
+
+  .heroText h1 {
+    font-size: clamp(
+      68px,
+      19vw,
+      100px
+    );
+  }
+
+  .description {
+    max-width: 310px;
+
+    font-size: 10px;
+
+    br {
+      display: none;
+    }
+  }
+
+  .startButton {
+    min-height: 39px;
+
+    padding:
+      0
+      17px;
+
+    gap: 18px;
+
+    font-size: 10px;
+  }
+
+  .iconRow {
+    gap: 3px;
+  }
+
+  .code,
+  .weather {
+    border-radius: 7px;
+  }
+}

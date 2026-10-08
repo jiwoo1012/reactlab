@@ -1,0 +1,664 @@
+/* =========================================
+   CHAT PAGE
+========================================= */
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+
+  padding:
+    125px
+    5vw
+    55px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(360px, 0.8fr)
+    minmax(600px, 1.2fr);
+
+  grid-template-rows:
+    auto
+    1fr;
+
+  column-gap: clamp(
+    55px,
+    6vw,
+    110px
+  );
+
+  background: #111111;
+  color: #f5f3ed;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.title {
+  grid-column: 1;
+  grid-row: 1;
+
+  align-self: end;
+
+  padding-top: 18px;
+
+  /* 필요 없는 websochet chat 숨김 */
+  > p {
+    display: none;
+  }
+
+  h1 {
+    margin: 0;
+
+    color: #f5f3ed;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: clamp(
+      48px,
+      4.6vw,
+      72px
+    );
+
+    font-weight: 900;
+
+    line-height: 0.95;
+    letter-spacing: -0.065em;
+  }
+}
+
+
+/* =========================================
+   CUBE AREA
+========================================= */
+
+.cubeArea {
+  grid-column: 1;
+  grid-row: 2;
+
+  position: relative;
+
+  min-height: 420px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding-top: 38px;
+
+  overflow: visible;
+
+  > div {
+    transform: scale(1.35);
+    transform-origin: center top;
+  }
+
+  canvas {
+    display: block;
+  }
+}
+
+
+/* =========================================
+   CHAT PANEL
+========================================= */
+
+.chatPanel {
+  grid-column: 2;
+  grid-row: 1 / 3;
+
+  align-self: center;
+
+  width: 100%;
+
+  height: min(
+    68vh,
+    650px
+  );
+
+  min-height: 570px;
+
+  padding:
+    25px
+    27px
+    22px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: #f3f0e8;
+  color: #111111;
+
+  box-shadow:
+    0
+    28px
+    70px
+    rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================
+   USER
+========================================= */
+
+.user {
+  flex: 0 0 auto;
+
+  min-height: 44px;
+
+  padding-bottom: 17px;
+
+  display: flex;
+  align-items: center;
+
+  border-bottom:
+    1px
+    solid
+    #cbc7bc;
+
+  color: #77736b;
+
+  font-size: 12px;
+
+  &::before {
+    content: "";
+
+    width: 8px;
+    height: 8px;
+
+    margin-right: 9px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #caff36;
+  }
+
+  strong {
+    margin-left: 6px;
+
+    color: #111111;
+
+    font-size: 13px;
+    font-weight: 900;
+  }
+}
+
+
+/* =========================================
+   MESSAGE SCROLL AREA
+========================================= */
+
+.messages {
+  flex: 1;
+
+  /*
+    flex 안에서 스크롤 영역이
+    정상적으로 줄어들 수 있게 필수
+  */
+  min-height: 0;
+
+  width: 100%;
+
+  padding:
+    16px
+    8px
+    18px
+    0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scroll-behavior: smooth;
+
+  overscroll-behavior: contain;
+
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    #b7b2a8
+    transparent;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+
+    background: #b7b2a8;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #979188;
+  }
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.message {
+  width: fit-content;
+  max-width: 72%;
+
+  flex: 0 0 auto;
+
+  padding:
+    11px
+    14px
+    12px;
+
+  strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 10px;
+    font-weight: 900;
+
+    line-height: 1.2;
+  }
+
+  p {
+    margin: 0;
+
+    font-size: 13px;
+    line-height: 1.55;
+
+    word-break: break-word;
+  }
+}
+
+
+/* =========================================
+   OTHER USER MESSAGE
+   다른 사람 → 왼쪽
+========================================= */
+
+.otherMessage {
+  align-self: flex-start;
+
+  border:
+    1px
+    solid
+    #d1cdc3;
+
+  background: #faf8f2;
+
+  strong {
+    color: #7165ff;
+  }
+
+  p {
+    color: #22211f;
+  }
+}
+
+
+/* =========================================
+   MY MESSAGE
+   나 → 오른쪽
+========================================= */
+
+.myMessage {
+  align-self: flex-end;
+
+  border:
+    1px
+    solid
+    #111111;
+
+  background: #111111;
+
+  color: #f7f5ef;
+
+  strong {
+    color: #caff36;
+
+    text-align: right;
+  }
+
+  p {
+    color: #f7f5ef;
+  }
+}
+
+
+/* =========================================
+   INPUT AREA
+========================================= */
+
+.inputArea {
+  position: relative;
+
+  flex: 0 0 auto;
+
+  padding-top: 15px;
+
+  border-top:
+    1px
+    solid
+    #cbc7bc;
+
+  background: #f3f0e8;
+
+  input {
+    width: 100%;
+    height: 62px;
+
+    padding:
+      0
+      70px
+      0
+      21px;
+
+    border:
+      2px
+      solid
+      #111111;
+
+    border-radius: 999px;
+
+    outline: none;
+
+    background: #fffefa;
+    color: #111111;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    transition:
+      background 0.18s ease,
+      border-color 0.18s ease,
+      box-shadow 0.18s ease;
+
+    &::placeholder {
+      color: #aaa69d;
+    }
+
+    &:hover {
+      background: #ffffff;
+    }
+
+    &:focus {
+      background: #ffffff;
+
+      box-shadow:
+        4px
+        4px
+        0
+        #7165ff;
+    }
+  }
+}
+
+
+/* =========================================
+   SEND BUTTON
+========================================= */
+
+.sendButton {
+  position: absolute;
+
+  right: 9px;
+  bottom: 8px;
+
+  width: 46px;
+  height: 46px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: #caff36;
+  color: #111111;
+
+  font-size: 19px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease;
+
+  &:hover {
+    transform: scale(1.06);
+
+    background: #d7ff67;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* =========================================
+   1200px
+========================================= */
+
+@media (max-width: 1200px) {
+  .page {
+    padding:
+      120px
+      34px
+      50px;
+
+    grid-template-columns:
+      minmax(300px, 0.75fr)
+      minmax(520px, 1.25fr);
+
+    column-gap: 45px;
+  }
+
+  .title {
+    h1 {
+      font-size: clamp(
+        46px,
+        5vw,
+        64px
+      );
+    }
+  }
+
+  .cubeArea {
+    > div {
+      transform: scale(1.15);
+    }
+  }
+
+  .chatPanel {
+    min-height: 550px;
+  }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 950px) {
+  .page {
+    min-height: 100vh;
+
+    padding:
+      110px
+      24px
+      55px;
+
+    display: block;
+  }
+
+  .title {
+    padding-top: 0;
+
+    margin-bottom: 10px;
+
+    h1 {
+      font-size: 55px;
+    }
+  }
+
+  .cubeArea {
+    min-height: 270px;
+
+    padding-top: 5px;
+
+    align-items: center;
+
+    > div {
+      transform: scale(1);
+    }
+  }
+
+  .chatPanel {
+    width: 100%;
+
+    height: 580px;
+    min-height: 0;
+
+    margin-top: 5px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .page {
+    padding:
+      100px
+      16px
+      40px;
+  }
+
+  .title {
+    margin-bottom: 0;
+
+    h1 {
+      font-size: 43px;
+    }
+  }
+
+  .cubeArea {
+    min-height: 220px;
+
+    padding-top: 0;
+
+    > div {
+      transform: scale(0.78);
+    }
+  }
+
+  .chatPanel {
+    height: 530px;
+
+    padding:
+      19px
+      15px
+      15px;
+
+    border-radius: 15px;
+  }
+
+  .user {
+    min-height: 40px;
+
+    padding-bottom: 14px;
+
+    font-size: 11px;
+
+    strong {
+      font-size: 12px;
+    }
+  }
+
+  .messages {
+    padding:
+      14px
+      4px
+      15px
+      0;
+
+    gap: 8px;
+  }
+
+  .message {
+    max-width: 86%;
+
+    padding:
+      10px
+      12px
+      11px;
+
+    strong {
+      font-size: 9px;
+    }
+
+    p {
+      font-size: 12.5px;
+    }
+  }
+
+  .inputArea {
+    padding-top: 12px;
+
+    input {
+      height: 55px;
+
+      padding:
+        0
+        58px
+        0
+        17px;
+
+      font-size: 12px;
+
+      &:focus {
+        box-shadow:
+          3px
+          3px
+          0
+          #7165ff;
+      }
+    }
+
+    &::after {
+      right: 7px;
+      bottom: 6px;
+
+      width: 43px;
+      height: 43px;
+
+      font-size: 17px;
+    }
+  }
+}

@@ -1,0 +1,1044 @@
+/* =========================================
+   WEATHER PAGE
+========================================= */
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+
+  padding:
+    125px
+    6vw
+    90px;
+
+  background: #f3f0e8;
+  color: #111111;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.title {
+  width: min(1120px, 100%);
+
+  margin:
+    0
+    auto
+    42px;
+
+  /* OPEN WEATHER API 숨김 */
+  > p {
+    display: none;
+  }
+
+  h2 {
+    margin: 0;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: clamp(
+      52px,
+      6vw,
+      72px
+    );
+
+    font-weight: 900;
+
+    line-height: 0.92;
+    letter-spacing: -0.07em;
+  }
+
+  span {
+    display: block;
+
+    margin-top: 22px;
+
+    color: #6c6962;
+
+    font-size: 15px;
+    line-height: 1.6;
+  }
+}
+
+
+/* =========================================
+   MAIN PANEL
+========================================= */
+
+.panel {
+  width: min(1120px, 100%);
+
+  margin: 0 auto;
+
+  padding-top: 25px;
+
+  border-top:
+    2px
+    solid
+    #111111;
+}
+
+
+/* =========================================
+   SEARCH AREA
+========================================= */
+
+.searchArea {
+  position: relative;
+
+  padding-bottom: 34px;
+
+  border-bottom:
+    1px
+    solid
+    #cbc7bc;
+
+  > label {
+    display: block;
+
+    margin-bottom: 12px;
+
+    font-size: 15px;
+    font-weight: 900;
+
+    letter-spacing: -0.025em;
+  }
+}
+
+
+/* =========================================
+   SEARCH BOX
+========================================= */
+
+.searchBox {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+
+  gap: 10px;
+
+  align-items: start;
+
+
+  input {
+    width: 100%;
+    height: 58px;
+
+    padding:
+      0
+      19px;
+
+    border:
+      1.5px
+      solid
+      #111111;
+
+    border-radius: 0;
+
+    outline: none;
+
+    background: #faf8f2;
+    color: #111111;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    transition:
+      background 0.16s ease,
+      border-color 0.16s ease,
+      box-shadow 0.16s ease;
+
+    &::placeholder {
+      color: #aaa69b;
+    }
+
+    &:hover {
+      background: #ffffff;
+    }
+
+    &:focus {
+      background: #ffffff;
+
+      border-color: #458bff;
+
+      box-shadow:
+        0
+        0
+        0
+        3px
+        rgba(
+          69,
+          139,
+          255,
+          0.1
+        );
+    }
+  }
+
+
+  /*
+    중요:
+    자동완성 button에 적용되지 않도록
+    "날씨 검색 버튼"만 직접 선택
+  */
+  > button {
+    min-width: 140px;
+    height: 58px;
+
+    padding:
+      0
+      24px;
+
+    border:
+      1.5px
+      solid
+      #111111;
+
+    border-radius: 0;
+
+    background: #111111;
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 13px;
+    font-weight: 900;
+
+    cursor: pointer;
+
+    transition:
+      background 0.16s ease,
+      color 0.16s ease,
+      transform 0.16s ease;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+
+      background: #458bff;
+      color: #111111;
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+
+      cursor: wait;
+    }
+  }
+}
+
+
+/* =========================================
+   INPUT AREA
+========================================= */
+
+.inputArea {
+  position: relative;
+
+  min-width: 0;
+
+  width: 100%;
+}
+
+
+/* =========================================
+   AUTOCOMPLETE LIST
+========================================= */
+
+.suggestions {
+  position: absolute;
+
+  top: calc(100% + 4px);
+  left: 0;
+
+  z-index: 300;
+
+  width: 100%;
+  max-height: 300px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  border:
+    1px
+    solid
+    #d4d0c6;
+
+  background: #fbfaf6;
+
+  box-shadow:
+    0
+    10px
+    26px
+    rgba(
+      17,
+      17,
+      17,
+      0.08
+    );
+
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    #c7c2b8
+    transparent;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #c7c2b8;
+
+    border-radius: 999px;
+  }
+}
+
+
+/* =========================================
+   AUTOCOMPLETE ITEM
+========================================= */
+
+.suggestion {
+  width: 100%;
+  min-height: 50px;
+
+  padding:
+    0
+    14px;
+
+  display: grid;
+
+  grid-template-columns:
+    20px
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 10px;
+
+  border: 0;
+
+  border-bottom:
+    1px
+    solid
+    #e8e4dc;
+
+  background: transparent;
+  color: #111111;
+
+  font-family: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.12s ease;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    background: #f0eee8;
+  }
+
+  &:focus-visible {
+    outline:
+      2px
+      solid
+      #458bff;
+
+    outline-offset: -2px;
+  }
+}
+
+
+/* =========================================
+   AUTOCOMPLETE SEARCH ICON
+========================================= */
+
+.searchIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #858078;
+
+  font-size: 14px;
+}
+
+
+/* =========================================
+   CITY TEXT
+========================================= */
+
+.cityText {
+  min-width: 0;
+
+  display: flex;
+  align-items: baseline;
+
+  gap: 8px;
+
+  strong {
+    flex-shrink: 0;
+
+    color: #111111;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    line-height: 1.3;
+
+    white-space: nowrap;
+  }
+
+  span {
+    overflow: hidden;
+
+    color: #979188;
+
+    font-size: 10px;
+    font-weight: 500;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+
+/* =========================================
+   COUNTRY
+========================================= */
+
+.country {
+  flex-shrink: 0;
+
+  color: #aaa49b;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   AUTOCOMPLETE LOADING
+========================================= */
+
+.suggestLoading {
+  padding:
+    15px
+    14px;
+
+  color: #98938a;
+
+  font-size: 11px;
+
+  background: #fbfaf6;
+}
+
+
+/* =========================================
+   HINT
+========================================= */
+
+.hint {
+  margin:
+    11px
+    0
+    0;
+
+  color: #8a867d;
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.error {
+  margin-top: 28px;
+
+  padding:
+    16px
+    18px;
+
+  border-left:
+    5px
+    solid
+    #ff583e;
+
+  background: #faf8f2;
+
+  color: #111111;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.empty {
+  min-height: 340px;
+
+  padding:
+    50px
+    20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  .emptyIcon {
+    width: 105px;
+    height: 105px;
+
+    margin-bottom: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ffc437;
+    color: #111111;
+
+    font-size: 50px;
+    line-height: 1;
+  }
+
+  strong {
+    font-size: 20px;
+    font-weight: 900;
+
+    letter-spacing: -0.035em;
+  }
+
+  p {
+    max-width: 420px;
+
+    margin:
+      9px
+      0
+      0;
+
+    color: #706d66;
+
+    font-size: 13px;
+    line-height: 1.65;
+
+    word-break: keep-all;
+  }
+}
+
+
+/* =========================================
+   WEATHER RESULT
+========================================= */
+
+.weatherResult {
+  margin-top: 32px;
+
+  overflow: hidden;
+
+  background: #faf8f2;
+
+  border:
+    2px
+    solid
+    #111111;
+}
+
+
+/* =========================================
+   WEATHER HEADER
+========================================= */
+
+.weatherHeader {
+  min-height: 300px;
+
+  padding:
+    42px
+    44px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+
+  align-items: end;
+
+  gap: 30px;
+
+  border-bottom:
+    2px
+    solid
+    #111111;
+
+  background: #458bff;
+
+  > div:first-child {
+    align-self: end;
+  }
+
+  h2 {
+    margin:
+      10px
+      0
+      0;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: clamp(
+      58px,
+      7vw,
+      110px
+    );
+
+    font-weight: 900;
+
+    line-height: 0.85;
+    letter-spacing: -0.07em;
+  }
+}
+
+
+/* =========================================
+   WEATHER LABEL
+========================================= */
+
+.weatherLabel {
+  display: inline-block;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 0.12em;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.description {
+  margin:
+    14px
+    0
+    0;
+
+  color:
+    rgba(
+      17,
+      17,
+      17,
+      0.7
+    );
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   TEMPERATURE
+========================================= */
+
+.temperature {
+  align-self: center;
+
+  display: flex;
+  align-items: flex-start;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: clamp(
+    100px,
+    11vw,
+    170px
+  );
+
+  font-weight: 900;
+
+  line-height: 0.8;
+  letter-spacing: -0.08em;
+
+  span {
+    margin:
+      8px
+      0
+      0
+      5px;
+
+    font-size: 30px;
+
+    letter-spacing: -0.04em;
+  }
+}
+
+
+/* =========================================
+   WEATHER INFO
+========================================= */
+
+.weatherInfo {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+}
+
+
+/* =========================================
+   INFO CARD
+========================================= */
+
+.infoCard {
+  min-height: 145px;
+
+  padding:
+    25px
+    28px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background: #faf8f2;
+
+  &:not(:last-child) {
+    border-right:
+      1px
+      solid
+      #cbc7bc;
+  }
+
+  span {
+    color: #79756d;
+
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  strong {
+    margin-top: 25px;
+
+    color: #111111;
+
+    font-size: 22px;
+    font-weight: 900;
+
+    line-height: 1.2;
+    letter-spacing: -0.035em;
+
+    word-break: keep-all;
+  }
+
+  &:nth-child(1) {
+    strong {
+      color: #458bff;
+    }
+  }
+
+  &:nth-child(2) {
+    strong {
+      color: #7165ff;
+    }
+  }
+
+  &:nth-child(3) {
+    strong {
+      color: #111111;
+    }
+  }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .page {
+    padding:
+      115px
+      24px
+      75px;
+  }
+
+  .title {
+    margin-bottom: 36px;
+
+    h2 {
+      font-size: clamp(
+        50px,
+        10vw,
+        68px
+      );
+    }
+  }
+
+  .weatherHeader {
+    min-height: 260px;
+
+    padding:
+      35px
+      30px;
+  }
+
+  .temperature {
+    font-size: 100px;
+
+    span {
+      font-size: 24px;
+    }
+  }
+
+  .weatherInfo {
+    grid-template-columns: 1fr;
+  }
+
+  .infoCard {
+    min-height: 105px;
+
+    &:not(:last-child) {
+      border-right: 0;
+
+      border-bottom:
+        1px
+        solid
+        #cbc7bc;
+    }
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .page {
+    padding:
+      105px
+      16px
+      55px;
+  }
+
+  .title {
+    margin-bottom: 30px;
+
+    h2 {
+      font-size: 50px;
+    }
+
+    span {
+      margin-top: 12px;
+
+      font-size: 13px;
+    }
+  }
+
+  .panel {
+    padding-top: 20px;
+  }
+
+  .searchArea {
+    padding-bottom: 28px;
+
+    > label {
+      font-size: 14px;
+    }
+  }
+
+  .searchBox {
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+
+    input {
+      height: 54px;
+
+      padding:
+        0
+        16px;
+
+      font-size: 13px;
+    }
+
+    > button {
+      width: 100%;
+      height: 52px;
+    }
+  }
+
+  .suggestions {
+    top: calc(100% + 4px);
+
+    max-height: 260px;
+  }
+
+  .suggestion {
+    min-height: 48px;
+
+    padding:
+      0
+      12px;
+
+    grid-template-columns:
+      18px
+      minmax(0, 1fr)
+      auto;
+
+    gap: 8px;
+  }
+
+  .cityText {
+    gap: 6px;
+
+    strong {
+      font-size: 12.5px;
+    }
+
+    span {
+      font-size: 9.5px;
+    }
+  }
+
+  .country {
+    font-size: 9.5px;
+  }
+
+  .hint {
+    font-size: 10.5px;
+  }
+
+  .empty {
+    min-height: 300px;
+
+    .emptyIcon {
+      width: 90px;
+      height: 90px;
+
+      margin-bottom: 20px;
+
+      font-size: 43px;
+    }
+
+    strong {
+      font-size: 18px;
+    }
+
+    p {
+      max-width: 300px;
+
+      font-size: 12px;
+    }
+  }
+
+  .weatherResult {
+    margin-top: 25px;
+  }
+
+  .weatherHeader {
+    min-height: 290px;
+
+    padding:
+      27px
+      22px;
+
+    grid-template-columns: 1fr;
+
+    align-items: start;
+
+    gap: 30px;
+
+    h2 {
+      font-size: 58px;
+    }
+  }
+
+  .temperature {
+    align-self: end;
+
+    justify-self: end;
+
+    font-size: 90px;
+
+    span {
+      margin-top: 4px;
+
+      font-size: 21px;
+    }
+  }
+
+  .description {
+    margin-top: 10px;
+
+    font-size: 13px;
+  }
+
+  .infoCard {
+    min-height: 95px;
+
+    padding:
+      20px
+      22px;
+
+    strong {
+      margin-top: 15px;
+
+      font-size: 19px;
+    }
+  }
+
+  .error {
+    margin-top: 22px;
+
+    padding:
+      15px
+      17px;
+
+    font-size: 12px;
+  }
+}

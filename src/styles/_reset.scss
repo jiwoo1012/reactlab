@@ -1,0 +1,175 @@
+// ========================================
+// Reset
+// 브라우저 기본 스타일 초기화 및
+// 프로젝트 공통 렌더링 기준 설정
+// ========================================
+
+// 1. Box sizing
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// 2. HTML
+html {
+  margin: 0;
+  padding: 0;
+
+  // 모바일에서 글자 크기가 임의로 확대되는 현상 방지
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+
+  // 부드러운 스크롤
+  scroll-behavior: smooth;
+}
+
+// 3. Body
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  line-height: 1.5;
+
+  // 브라우저별 폰트 렌더링 보정
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 4. 기본 여백 제거
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+// 5. 리스트 초기화
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// 6. 링크
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// 7. 이미지 / 미디어 반응형 처리
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// 이미지 비율 유지
+img,
+video {
+  height: auto;
+}
+
+// 8. 폼 요소
+input,
+button,
+textarea,
+select {
+  margin: 0;
+  padding: 0;
+
+  font: inherit;
+  color: inherit;
+}
+
+// 9. 버튼
+button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+// 10. textarea
+textarea {
+  resize: vertical;
+}
+
+// 11. input / textarea placeholder
+input::placeholder,
+textarea::placeholder {
+  opacity: 1;
+  color: inherit;
+}
+
+// 12. 테이블
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+// 13. fieldset
+fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+// 14. legend
+legend {
+  padding: 0;
+}
+
+// 15. 숨김 속성
+[hidden] {
+  display: none !important;
+}
+
+// 16. 버튼 및 폼 비활성화
+button:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled {
+  cursor: not-allowed;
+}
+
+// 17. 긴 텍스트가 화면을 뚫고 나가는 현상 방지
+p,
+li,
+dd {
+  overflow-wrap: break-word;
+}
+
+// 18. Next.js root 영역
+#__next {
+  isolation: isolate;
+}
+
+// 19. 모션 감소 설정을 사용하는 사용자 배려
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

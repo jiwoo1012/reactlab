@@ -1,0 +1,415 @@
+/* =========================================
+   SIGNUP PAGE
+========================================= */
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+
+  padding:
+    110px
+    24px
+    50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #0a0a0a;
+  color: #111111;
+}
+
+
+/* =========================================
+   WRAPPER
+========================================= */
+
+.signupWrapper {
+  width: 100%;
+  max-width: 640px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 22px;
+
+  /*
+    로그인 페이지처럼
+    정중앙보다 아주 살짝 위
+  */
+  transform: translateY(-16px);
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.title {
+  width: 100%;
+
+  text-align: center;
+
+  /* JOIN US 숨김 */
+  > p {
+    display: none;
+  }
+
+  h1 {
+    margin: 0;
+
+    color: #f4f0e8;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: clamp(
+      56px,
+      5.8vw,
+      78px
+    );
+
+    font-weight: 900;
+
+    line-height: 0.92;
+    letter-spacing: -0.065em;
+  }
+
+  span {
+    display: block;
+
+    margin-top: 12px;
+
+    color: #b8b3aa;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    word-break: keep-all;
+  }
+}
+
+
+/* =========================================
+   SIGNUP CARD
+========================================= */
+
+.signupCard {
+  width: 100%;
+
+  padding:
+    34px
+    40px
+    32px;
+
+  background: #f3f0e8;
+
+  border-radius: 17px;
+
+  box-shadow:
+    0
+    28px
+    70px
+    rgba(
+      0,
+      0,
+      0,
+      0.32
+    );
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 17px;
+}
+
+
+/* =========================================
+   INPUT GROUP
+========================================= */
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  label {
+    color: #111111;
+
+    font-size: 12px;
+    font-weight: 900;
+
+    letter-spacing: -0.02em;
+  }
+
+  input {
+    width: 100%;
+    height: 54px;
+
+    padding:
+      0
+      17px;
+
+    border:
+      1.5px
+      solid
+      #111111;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #fbf9f3;
+    color: #111111;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    transition:
+      background 0.18s ease,
+      border-color 0.18s ease,
+      box-shadow 0.18s ease;
+
+    &::placeholder {
+      color: #a39d92;
+    }
+
+    &:hover {
+      background: #ffffff;
+    }
+
+    &:focus {
+      background: #ffffff;
+
+      border-color: #111111;
+
+      /*
+        회원가입 페이지의 포인트 컬러
+      */
+      box-shadow:
+        4px
+        4px
+        0
+        #7165ff;
+    }
+  }
+}
+
+
+/* =========================================
+   SIGNUP BUTTON
+========================================= */
+
+.signupButton {
+  width: 100%;
+  height: 56px;
+
+  margin-top: 6px;
+
+  border:
+    1.5px
+    solid
+    #111111;
+
+  border-radius: 999px;
+
+  background: #7165ff;
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 14px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+
+    background: #8176ff;
+
+    box-shadow:
+      0
+      9px
+      22px
+      rgba(
+        113,
+        101,
+        255,
+        0.2
+      );
+  }
+
+  &:active {
+    transform: translateY(0);
+
+    box-shadow: none;
+  }
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.message {
+  margin:
+    -2px
+    0
+    0;
+
+  padding:
+    12px
+    14px;
+
+  border-left:
+    4px
+    solid
+    #7165ff;
+
+  background:
+    rgba(
+      113,
+      101,
+      255,
+      0.08
+    );
+
+  color: #5147bb;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 768px) {
+  .page {
+    padding:
+      105px
+      20px
+      45px;
+
+    align-items: flex-start;
+  }
+
+  .signupWrapper {
+    max-width: 580px;
+
+    gap: 20px;
+
+    transform: none;
+  }
+
+  .title {
+    h1 {
+      font-size: 56px;
+    }
+
+    span {
+      margin-top: 10px;
+
+      font-size: 13px;
+    }
+  }
+
+  .signupCard {
+    padding:
+      30px
+      28px
+      28px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 500px) {
+  .page {
+    padding:
+      100px
+      14px
+      40px;
+  }
+
+  .signupWrapper {
+    gap: 18px;
+  }
+
+  .title {
+    h1 {
+      font-size: 47px;
+    }
+
+    span {
+      font-size: 12.5px;
+    }
+  }
+
+  .signupCard {
+    padding:
+      25px
+      18px
+      22px;
+
+    border-radius: 14px;
+  }
+
+  .form {
+    gap: 14px;
+  }
+
+  .inputGroup {
+    input {
+      height: 51px;
+
+      border-radius: 8px;
+
+      font-size: 13px;
+
+      &:focus {
+        box-shadow:
+          3px
+          3px
+          0
+          #7165ff;
+      }
+    }
+  }
+
+  .signupButton {
+    height: 52px;
+
+    font-size: 13px;
+  }
+
+  .message {
+    padding:
+      10px
+      12px;
+
+    font-size: 11.5px;
+  }
+}
