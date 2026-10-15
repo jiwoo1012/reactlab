@@ -10,6 +10,44 @@
   color: #111111;
 }
 
+.status {
+  width: min(1120px, 100%);
+  margin: 20px auto;
+}
+
+.quizActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+
+  button {
+    padding: 12px 20px;
+    border: 1px solid #7165ff;
+    border-radius: 8px;
+    background: #eeebff;
+    color: #302f2b;
+    font: inherit;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: wait;
+    }
+  }
+}
+
+.detail {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #cbc7bd;
+
+  h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+  }
+}
+
 
 /* =========================================
    TITLE

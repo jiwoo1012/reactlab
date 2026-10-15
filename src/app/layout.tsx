@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import "@/styles/globals.scss";
 import Header from './components/Header';
+import GuideChatbot from './components/GuideChatbot';
 
 export const metadata: Metadata = {
   title: "React AI Study",
@@ -17,6 +18,7 @@ const RootLayout = ({ children }: Props) => {
       <body>
         <Header />
         {children}
+        <GuideChatbot/>
       </body>
     </html>
   )

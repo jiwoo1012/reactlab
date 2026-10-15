@@ -10,8 +10,11 @@ export type StudyItem={
 export type AiRequest = {
     message: string
     mode: Studymode
+    currentQuiz?: string
+    previousQuestions?: string[]
 }
 
 export type AiResponse = {
     answer: string
+    questionAns?: string
 }
